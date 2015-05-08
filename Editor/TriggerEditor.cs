@@ -35,33 +35,51 @@ namespace OcclusionTrigger {
         public override void OnInspectorGUI() {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(
-                targetTransform,
-                new GUIContent(
-                    "Target",
-                    "Target transform to check for occlusion."));
-
-            EditorGUILayout.PropertyField(
-                layerMask,
-                new GUIContent(
-                    "Layer Mask",
-                    "Layers that can occlude target transform."));
+            DrawTargetField();
+            DrawLayerMaskDropdown();
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(
-                beginOcclusionEvent,
-                new GUIContent(
-                    "Occlusion Start",
-                    "Action to execute when target starts being occluded."));
+            DrawBeginOcclusionEventField();
+            DrawEndOcclusionEventField();
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawEndOcclusionEventField() {
 
             EditorGUILayout.PropertyField(
                 endOcclusionEvent,
                 new GUIContent(
                     "Occlusion End",
                     "Action to execute when target stops being occluded."));
+        }
 
-            serializedObject.ApplyModifiedProperties();
+        private void DrawBeginOcclusionEventField() {
+
+            EditorGUILayout.PropertyField(
+                beginOcclusionEvent,
+                new GUIContent(
+                    "Occlusion Start",
+                    "Action to execute when target starts being occluded."));
+        }
+
+        private void DrawLayerMaskDropdown() {
+
+            EditorGUILayout.PropertyField(
+                layerMask,
+                new GUIContent(
+                    "Layer Mask",
+                    "Layers that can occlude target transform."));
+        }
+
+        private void DrawTargetField() {
+
+            EditorGUILayout.PropertyField(
+                targetTransform,
+                new GUIContent(
+                    "Target",
+                    "Target transform to check for occlusion."));
         }
 
     }
