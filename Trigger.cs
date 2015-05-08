@@ -26,6 +26,9 @@ namespace OcclusionTrigger {
         [SerializeField]
         private UnityEvent endOcclusionEvent;
 
+        [SerializeField]
+        private Transform myTransform;
+
         #endregion
 
         #region PROPERTIES
@@ -54,6 +57,47 @@ namespace OcclusionTrigger {
         public UnityEvent EndOcclusionEvent {
             get { return endOcclusionEvent; }
             set { endOcclusionEvent = value; }
+        }
+
+        /// <summary>
+        /// Cached transform component.
+        /// </summary>
+        private Transform MyTransform {
+            get { return myTransform; }
+        }
+
+        #endregion
+
+        #region UNITY MESSAGES
+
+        private void Reset() {
+            myTransform = GetComponent<Transform>();
+        }
+
+        #endregion
+
+        #region METHODS
+
+        private bool CheckTargetTransformOcclusion() {
+            // Get distance for raycast.
+            var tDist =
+                (TargetTransform.position - MyTransform.position).magnitude
+                // Ray length decreased by 0.1 to not hit the floor.
+                - 0.1f;
+            // Get direction for raycast.
+            var tDir =
+                (TargetTransform.position - MyTransform.position).normalized;
+
+            RaycastHit hit;
+
+            var occluded = Physics.Raycast(
+                MyTransform.position,
+                tDir,
+                out hit,
+                tDist,
+                LayerMask);
+
+            return occluded;
         }
 
         #endregion
