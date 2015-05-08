@@ -74,11 +74,15 @@ namespace OcclusionTrigger {
             myTransform = GetComponent<Transform>();
         }
 
+        private void LateUpdate() {
+            
+        }
+
         #endregion
 
         #region METHODS
 
-        private bool CheckTargetTransformOcclusion() {
+        private bool TargetOccluded() {
             // Get distance for raycast.
             var tDist =
                 (TargetTransform.position - MyTransform.position).magnitude
