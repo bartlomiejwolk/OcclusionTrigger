@@ -21,6 +21,7 @@ namespace OcclusionTrigger {
 
         #endregion
 
+        #region UNITY MESSAGES
         private void OnEnable() {
             Script = (Trigger) target;
 
@@ -46,6 +47,9 @@ namespace OcclusionTrigger {
             serializedObject.ApplyModifiedProperties();
         }
 
+        #endregion
+
+        #region INSPECTOR
         private void DrawEndOcclusionEventField() {
 
             EditorGUILayout.PropertyField(
@@ -82,6 +86,18 @@ namespace OcclusionTrigger {
                     "Target transform to check for occlusion."));
         }
 
+        #endregion
+
+        #region METHODS
+
+        [MenuItem("Component/OcclusionTrigger")]
+        private static void AddTriggerComponent() {
+            if (Selection.activeGameObject != null) {
+                Selection.activeGameObject.AddComponent(typeof(Trigger));
+            }
+        }
+ 
+        #endregion
     }
 
 }
