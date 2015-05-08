@@ -15,13 +15,28 @@ namespace OcclusionTrigger {
 
         [SerializeField]
         private Transform targetTransform;
+
+        [SerializeField]
+        private LayerMask layerMask;
+
         #endregion
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Transform to check for occlusion.
+        /// </summary>
         public Transform TargetTransform {
             get { return targetTransform; }
             set { targetTransform = value; }
+        }
+
+        /// <summary>
+        /// Layers that can occlude target transform.
+        /// </summary>
+        public LayerMask LayerMask {
+            get { return layerMask; }
+            set { layerMask = value; }
         }
 
         #endregion
