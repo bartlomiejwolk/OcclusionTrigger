@@ -26,9 +26,6 @@ namespace OcclusionTrigger {
         [SerializeField]
         private UnityEvent endOcclusionEvent;
 
-        [SerializeField]
-        private Transform myTransform;
-
         #endregion
 
         #region PROPERTIES
@@ -62,25 +59,53 @@ namespace OcclusionTrigger {
         /// <summary>
         /// Cached transform component.
         /// </summary>
-        private Transform MyTransform {
-            get { return myTransform; }
-        }
+        private Transform MyTransform { get; set; }
 
         #endregion
 
         #region UNITY MESSAGES
 
-        private void Reset() {
-            myTransform = GetComponent<Transform>();
+        private void Start() {
+            StartCoroutine(HandleExecuteAction());
         }
 
-        private void LateUpdate() {
-            
+        private void Awake() {
+            MyTransform = GetComponent<Transform>();
         }
 
         #endregion
 
         #region METHODS
+
+        /// <summary>
+        /// Checks if target occlusion changed and executes corresponding
+        /// action.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator HandleExecuteAction() {
+            var prevOccluded = false;
+
+            while (true) {
+                var occluded = TargetOccluded();
+
+                if (occluded != prevOccluded) {
+                    InvokeOcclusionEvent(occluded);
+                }
+
+                prevOccluded = occluded;
+
+                yield return null;
+            }
+        }
+
+        private void InvokeOcclusionEvent(bool occluded) {
+            if (occluded) {
+                BeginOcclusionEvent.Invoke();
+            }
+            else {
+                endOcclusionEvent.Invoke();
+            }
+        }
 
         private bool TargetOccluded() {
             // Get distance for raycast.
