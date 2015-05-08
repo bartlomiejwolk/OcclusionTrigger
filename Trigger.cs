@@ -39,11 +39,17 @@ namespace OcclusionTrigger {
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Actions executed when target transform gets occluded.
+        /// </summary>
         public UnityEvent BeginOcclusionEvent {
             get { return beginOcclusionEvent; }
             set { beginOcclusionEvent = value; }
         }
 
+        /// <summary>
+        /// Actions executed when target transform stops being occluded.
+        /// </summary>
         public UnityEvent EndOcclusionEvent {
             get { return endOcclusionEvent; }
             set { endOcclusionEvent = value; }
