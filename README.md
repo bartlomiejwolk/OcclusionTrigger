@@ -11,7 +11,7 @@ Licensed under MIT license. See LICENSE file in the project root folder.
 * Separate action for occlusion begin and end
 * All properties can be set with public API
 
-[API Reference]()
+[API Reference](https://github.com/bartlomiejwolk/occlusiontrigger/wiki/API%20Reference)
 
 ## Quick Start
 
