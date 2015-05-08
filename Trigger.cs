@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace OcclusionTrigger {
 
@@ -19,6 +20,12 @@ namespace OcclusionTrigger {
         [SerializeField]
         private LayerMask layerMask;
 
+        [SerializeField]
+        private UnityEvent beginOcclusionEvent;
+
+        [SerializeField]
+        private UnityEvent endOcclusionEvent;
+
         #endregion
 
         #region PROPERTIES
@@ -37,6 +44,16 @@ namespace OcclusionTrigger {
         public LayerMask LayerMask {
             get { return layerMask; }
             set { layerMask = value; }
+        }
+
+        public UnityEvent BeginOcclusionEvent {
+            get { return beginOcclusionEvent; }
+            set { beginOcclusionEvent = value; }
+        }
+
+        public UnityEvent EndOcclusionEvent {
+            get { return endOcclusionEvent; }
+            set { endOcclusionEvent = value; }
         }
 
         #endregion

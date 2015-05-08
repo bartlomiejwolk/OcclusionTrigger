@@ -16,6 +16,8 @@ namespace OcclusionTrigger {
 
         private SerializedProperty targetTransform;
         private SerializedProperty layerMask;
+        private SerializedProperty beginOcclusionEvent;
+        private SerializedProperty endOcclusionEvent;
 
         #endregion
 
@@ -24,6 +26,10 @@ namespace OcclusionTrigger {
 
             targetTransform = serializedObject.FindProperty("targetTransform");
             layerMask = serializedObject.FindProperty("layerMask");
+            beginOcclusionEvent =
+                serializedObject.FindProperty("beginOcclusionEvent");
+            endOcclusionEvent =
+                serializedObject.FindProperty("endOcclusionEvent");
         }
 
         public override void OnInspectorGUI() {
@@ -40,6 +46,20 @@ namespace OcclusionTrigger {
                 new GUIContent(
                     "Layer Mask",
                     "Layers that can occlude target transform."));
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(
+                beginOcclusionEvent,
+                new GUIContent(
+                    "Occlusion Start",
+                    "Action to execute when target starts being occluded."));
+
+            EditorGUILayout.PropertyField(
+                endOcclusionEvent,
+                new GUIContent(
+                    "Occlusion End",
+                    "Action to execute when target stops being occluded."));
 
             serializedObject.ApplyModifiedProperties();
         }
