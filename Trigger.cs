@@ -12,6 +12,13 @@ namespace OcclusionTrigger {
     /// </remarks>
     public sealed class Trigger : MonoBehaviour {
 
+        #region CONSTANTS
+
+        public const string VERSION = "v0.1.0";
+        public const string EXTENSION = "OcclusionTrigger";
+
+        #endregion
+
         #region FIELDS
 
         [SerializeField]

@@ -36,6 +36,7 @@ namespace OcclusionTrigger {
         public override void OnInspectorGUI() {
             serializedObject.Update();
 
+            DrawVersionLabel();
             DrawTargetField();
             DrawLayerMaskDropdown();
 
@@ -50,6 +51,15 @@ namespace OcclusionTrigger {
         #endregion
 
         #region INSPECTOR
+
+        private void DrawVersionLabel() {
+            EditorGUILayout.LabelField(
+                string.Format(
+                    "{0} ({1})",
+                    Trigger.VERSION,
+                    Trigger.EXTENSION));
+        }
+ 
         private void DrawEndOcclusionEventField() {
 
             EditorGUILayout.PropertyField(
