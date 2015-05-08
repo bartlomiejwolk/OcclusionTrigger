@@ -1,36 +1,27 @@
 ﻿// Copyright (c) 2015 Bartlomiej Wolk (bartlomiejwolk@gmail.com)
 // 
-// This file is part of the OcclusionTrigger extension for Unity.
-// Licensed under the MIT license. See LICENSE file in the project root folder.
+// This file is part of the OcclusionTrigger extension for Unity. Licensed
+// under the MIT license. See LICENSE file in the project root folder.
 
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace OcclusionTrigger {
 
     /// <summary>
-    /// Performs an action when specified transform is occluded.
+    ///     Performs an action when specified transform is occluded.
     /// </summary>
-    /// <remarks>
-    /// Put it on the camera component.
-    /// </remarks>
+    /// <remarks>Put it on the camera component.</remarks>
     public sealed class Trigger : MonoBehaviour {
-
         #region CONSTANTS
 
-        public const string VERSION = "v0.1.0";
         public const string EXTENSION = "OcclusionTrigger";
+        public const string VERSION = "v0.1.0";
 
-        #endregion
+        #endregion CONSTANTS
 
         #region FIELDS
-
-        [SerializeField]
-        private Transform targetTransform;
-
-        [SerializeField]
-        private LayerMask layerMask;
 
         [SerializeField]
         private UnityEvent beginOcclusionEvent;
@@ -38,25 +29,15 @@ namespace OcclusionTrigger {
         [SerializeField]
         private UnityEvent endOcclusionEvent;
 
-        #endregion
+        [SerializeField]
+        private LayerMask layerMask;
+
+        [SerializeField]
+        private Transform targetTransform;
+
+        #endregion FIELDS
 
         #region PROPERTIES
-
-        /// <summary>
-        /// Transform to check for occlusion.
-        /// </summary>
-        public Transform TargetTransform {
-            get { return targetTransform; }
-            set { targetTransform = value; }
-        }
-
-        /// <summary>
-        /// Layers that can occlude target transform.
-        /// </summary>
-        public LayerMask LayerMask {
-            get { return layerMask; }
-            set { layerMask = value; }
-        }
 
         public UnityEvent BeginOcclusionEvent {
             get { return beginOcclusionEvent; }
@@ -69,29 +50,45 @@ namespace OcclusionTrigger {
         }
 
         /// <summary>
-        /// Cached transform component.
+        ///     Layers that can occlude target transform.
+        /// </summary>
+        public LayerMask LayerMask {
+            get { return layerMask; }
+            set { layerMask = value; }
+        }
+
+        /// <summary>
+        ///     Transform to check for occlusion.
+        /// </summary>
+        public Transform TargetTransform {
+            get { return targetTransform; }
+            set { targetTransform = value; }
+        }
+
+        /// <summary>
+        ///     Cached transform component.
         /// </summary>
         private Transform MyTransform { get; set; }
 
-        #endregion
+        #endregion PROPERTIES
 
         #region UNITY MESSAGES
-
-        private void Start() {
-            StartCoroutine(HandleExecuteAction());
-        }
 
         private void Awake() {
             MyTransform = GetComponent<Transform>();
         }
 
-        #endregion
+        private void Start() {
+            StartCoroutine(HandleExecuteAction());
+        }
+
+        #endregion UNITY MESSAGES
 
         #region METHODS
 
         /// <summary>
-        /// Checks if target occlusion changed and executes corresponding
-        /// action.
+        ///     Checks if target occlusion changed and executes corresponding
+        ///     action.
         /// </summary>
         /// <returns></returns>
         private IEnumerator HandleExecuteAction() {
@@ -123,7 +120,7 @@ namespace OcclusionTrigger {
             // Get distance for raycast.
             var tDist =
                 (TargetTransform.position - MyTransform.position).magnitude
-                // Ray length decreased by 0.1 to not hit the floor.
+                    // Ray length decreased by 0.1 to not hit the floor.
                 - 0.1f;
             // Get direction for raycast.
             var tDir =
@@ -141,7 +138,7 @@ namespace OcclusionTrigger {
             return occluded;
         }
 
-        #endregion
-
+        #endregion METHODS
     }
+
 }
